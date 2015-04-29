@@ -1,0 +1,26 @@
+{
+  "name": "weelearn",
+  "version": "0.1.0",
+  "description": "A HTML5 + Three.js app to help kids learn the body parts",
+  "main": "index.html",
+  "dependencies": {
+    "coffee-loader": "^0.7.2",
+    "three": "^0.71.0",
+    "webpack": "^1.8.10"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2",
+    "webpack-dev-server": "^1.8.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Three.js",
+    "HTML5",
+    "learning",
+    "WebGl"
+  ],
+  "author": "Arturo Coronel <aoitsu3@gmail.com>",
+  "license": "MIT"
+}
