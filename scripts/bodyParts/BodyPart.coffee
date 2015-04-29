@@ -15,7 +15,7 @@ class BodyPart
 
     # Set up three.js representation.
     @threeElement = new Cube(@width, @height, @depth, @color)
-    @threeElement.originClass = this
+    @threeElement.originClassInstance = this
     @threeElement.position.set(@position.x, @position.y, @position.z) if @position?
 
 

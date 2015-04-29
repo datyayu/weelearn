@@ -64,6 +64,13 @@ class Scene
 	  @renderer.render @scene, @camera
 
 
+  resize: (newSize) ->
+    console.log newSize
+    @renderer.setSize newSize.width, newSize.height
+    @camera.aspect = newSize.width / newSize.height
+    @camera.updateProjectionMatrix()
+
+
   # Add controls to the scene based on a given callback.
   setControls: (config) ->
     if config.renderCallback?

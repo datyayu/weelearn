@@ -1,6 +1,6 @@
 THREE  = require "three"
-Scene  = require "./scripts/Scene"
-actors = require "./scripts/Actors"
+Scene  = require "./Scene"
+actors = require "./Actors"
 
 config =
   width: window.innerWidth
@@ -24,8 +24,8 @@ animate = ->
 
 init = ->
   # Initalize components
-  scene = new Scene(config)
-  raycaster = new THREE.Raycaster()
+  scene       = new Scene(config)
+  raycaster   = new THREE.Raycaster()
   mouseVector = new THREE.Vector2()
 
   # Light
@@ -44,7 +44,7 @@ init = ->
 
 
 onMouseDown = (event) ->
-  # event.preventDefault()
+  event.preventDefault()
   mouseVector.x = ( event.clientX / config.width ) * 2 - 1
   mouseVector.y = - ( event.clientY / config.height ) * 2 + 1
 
@@ -52,21 +52,23 @@ onMouseDown = (event) ->
   intersects = raycaster.intersectObjects scene.getChildren()
 
   selectedElement = intersects[0]
-  if selectedElement
+  if selectedElement?
     selectedElement.originalHEX = selectedElement.object.material.color.getHex()
     selectedElement.object.material.color.set 0x00FF00
-    selectedElement.object.originClass.printMessage()
+    selectedElement.object.originClassInstance.printMessage()
 
 
 onMouseUp = (event) ->
-  # event.stopPropagation()
+  event.preventDefault()
 
   if selectedElement?
     selectedElement.object.material.color.setHex selectedElement.originalHEX
     selectedElement = null
 
 
-window.addEventListener( 'mousedown', onMouseDown, false )
-window.addEventListener( 'mouseup', onMouseUp, false )
+
+window.addEventListener "mousedown", onMouseDown, false
+window.addEventListener "mouseup", onMouseUp, false
+
 init()
 render()

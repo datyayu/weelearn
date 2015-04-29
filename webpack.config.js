@@ -1,6 +1,6 @@
 module.exports = {
 
-  entry: "./main.coffee",
+  entry: "./scripts/main.coffee",
   output: {
     path: __dirname,
     publicPath: "/assets/",
