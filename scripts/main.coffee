@@ -1,6 +1,6 @@
 THREE  = require "three"
 Scene  = require "./Scene"
-actors = require "./Actors"
+actors = require "./actors"
 
 config =
   width: window.innerWidth
@@ -38,6 +38,9 @@ init = ->
   # Add actors to scene
   for actor in actors
     scene.add actor.getElement()
+    children = actor.getElementChildren()
+    for child in children
+      scene.add child
   scene.add light
 
   animate()

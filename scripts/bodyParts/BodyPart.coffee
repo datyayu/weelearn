@@ -12,6 +12,8 @@ class BodyPart
     @color    = config.color or 0xFFFFFF
     @message  = config.message or "Body"
     @position = config.position or null
+    @reverse  = config.reverse or no
+
 
     # Set up three.js representation.
     @threeElement = new Cube(@width, @height, @depth, @color)
@@ -22,6 +24,10 @@ class BodyPart
   # Get the THREE.js representation of the body.
   getElement: ->
     @threeElement
+
+
+  getElementChildren: ->
+    @threeElement.children
 
 
   # Print wich part of the body is.
