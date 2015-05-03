@@ -4,12 +4,16 @@ actors = require "./actors"
 
 # Audio element
 audioElement = document.getElementById "audio"
+# Text element
+textElement = document.getElementById "text"
+textElement.size = textElement.style.height = 50
 
 # Scene properties configuration.
 scene = {}
 sceneConfig =
   width: window.innerWidth
-  height: window.innerHeight
+  # That last -4 removes the scroll bars on chrome, don't know why tho.
+  height: window.innerHeight - textElement.size - 4
 
 # Projection elements.
 selectedElement = null
@@ -20,6 +24,7 @@ raycaster = {}
 # Render the scene.
 render = ->
   scene.render()
+
 
 # Keep the rendering loop active.
 animate = ->
@@ -51,6 +56,7 @@ init = ->
   # Add lights
   scene.add light
 
+  # Start the rendering loop.
   animate()
 
 
@@ -71,7 +77,7 @@ onMouseDown = (event) ->
   if selectedElement?
     selectedElement.originalHEX = selectedElement.object.material.color.getHex()
     selectedElement.object.material.color.set 0x00FF00
-    selectedElement.object.originClassInstance.printMessage()
+    textElement.innerText = selectedElement.object.originClassInstance.getMessage()
     selectedElement.object.originClassInstance.playSound audioElement
 
 
@@ -92,5 +98,5 @@ window.addEventListener "mouseup", onMouseUp, false
 
 
 # Start app.
-init()
-render()
+window.onload = ->
+  init()

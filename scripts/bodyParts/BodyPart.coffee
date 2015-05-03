@@ -10,7 +10,7 @@ class BodyPart
     @height   = config.height or 50
     @depth    = config.depth or 50
     @color    = config.color or 0xFFFFFF
-    @message  = config.message or "Body"
+    @message  = config.message or "Cuerpo"
     @audioUrl = config.audioUrl or null
     @position = config.position or null
     @reverse  = config.reverse or no
@@ -32,9 +32,9 @@ class BodyPart
     @threeElement.children
 
 
-  # Print which part of the body is.
-  printMessage: ->
-    console.log @message
+  # Return which part of the body is.
+  getMessage: ->
+    @message
 
 
   # Play audio track telling the part of the body.

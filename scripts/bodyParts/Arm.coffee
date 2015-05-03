@@ -11,7 +11,7 @@ class Arm extends BodyPart
     config.width     = 50 unless config.width?
     config.depth     = 16 unless config.depth?
     config.color     = 0xFFFF00 unless config.color?
-    config.message   = "Arm" unless config.message?
+    config.message   = "Brazo" unless config.message?
     config.position  = {x:45, y:10, z:0} unless config.position?
     config.audioUrl  = "./assets/audio/Brazo.m4a" unless config.audioUrl?
 
