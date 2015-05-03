@@ -12,6 +12,7 @@ class Torso extends BodyPart
     config.color    = 0xFFFFFF unless config.color
     config.message  = "Torso" unless config.message
     config.position = {x:0, y:0, z:0} unless config.position
+    config.audioUrl  = "./assets/audio/Torso.m4a" unless config.audioUrl?
 
     super config
 

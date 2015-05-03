@@ -7,7 +7,7 @@ To install just do the usual ```$ npm install ``` and run using ```$ webpack-dev
 
 ### Pendants / Todo list
   - [x] <s>Make each body part clickeable</s>
-  - [ ] Add support for sound.
+  - [x] Add support for sound.
   - [ ] Replace Cube elements for proper body-like meshes.
   - [ ] Add a cool background
 

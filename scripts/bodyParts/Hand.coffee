@@ -11,6 +11,7 @@ class Hand extends BodyPart
     config.depth    = 10 unless config.depth?
     config.color    = 0xAA00AA unless config.color?
     config.message  = "Hand" unless config.message?
+    config.audioUrl  = "./assets/audio/Mano.m4a" unless config.audioUrl?
 
     # Set up position based on the parent (arm) position.
     if config.parent.position?

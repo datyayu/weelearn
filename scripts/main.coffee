@@ -2,14 +2,17 @@ THREE  = require "three"
 Scene  = require "./Scene"
 actors = require "./actors"
 
+# Audio element
+audioElement = document.getElementById "audio"
+
 # Scene properties configuration.
+scene = {}
 sceneConfig =
   width: window.innerWidth
   height: window.innerHeight
 
 # Projection elements.
 selectedElement = null
-scene = {}
 mouseVector = {}
 raycaster = {}
 
@@ -56,8 +59,8 @@ onMouseDown = (event) ->
   event.preventDefault()
 
   # Mouse position.
-  mouseVector.x = ( event.clientX / config.width ) * 2 - 1
-  mouseVector.y = - ( event.clientY / config.height ) * 2 + 1
+  mouseVector.x = ( event.clientX / sceneConfig.width ) * 2 - 1
+  mouseVector.y = - ( event.clientY / sceneConfig.height ) * 2 + 1
 
   # Check for intersections on raycastering.
   raycaster.setFromCamera mouseVector, scene.getCamera()
@@ -69,6 +72,7 @@ onMouseDown = (event) ->
     selectedElement.originalHEX = selectedElement.object.material.color.getHex()
     selectedElement.object.material.color.set 0x00FF00
     selectedElement.object.originClassInstance.printMessage()
+    selectedElement.object.originClassInstance.playSound audioElement
 
 
 # Mouse up handler.
