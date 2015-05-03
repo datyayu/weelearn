@@ -21,11 +21,12 @@ class BodyPart
     @threeElement.position.set(@position.x, @position.y, @position.z) if @position?
 
 
-  # Get the THREE.js representation of the body.
+  # Return the THREE.js representation of the body.
   getElement: ->
     @threeElement
 
 
+  # Return the childrens inside the Three.js element.
   getElementChildren: ->
     @threeElement.children
 

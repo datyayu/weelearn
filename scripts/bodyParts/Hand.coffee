@@ -5,7 +5,7 @@ class Hand extends BodyPart
   constructor: (config) ->
     config = {} unless config
 
-    # Config object setup.
+    # Setup config object.
     config.height   = 10 unless config.height?
     config.width    = 10 unless config.width?
     config.depth    = 10 unless config.depth?

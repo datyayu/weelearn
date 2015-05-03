@@ -5,6 +5,7 @@ class Head extends BodyPart
   constructor: (config) ->
     config = {} unless config
 
+    # Set up config object.
     config.height   = 20 unless config.height
     config.width    = 20 unless config.width
     config.depth    = 20 unless config.depth

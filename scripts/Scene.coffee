@@ -64,8 +64,8 @@ class Scene
 	  @renderer.render @scene, @camera
 
 
+  # Resize the viewport and update the scene matrix. 
   resize: (newSize) ->
-    console.log newSize
     @renderer.setSize newSize.width, newSize.height
     @camera.aspect = newSize.width / newSize.height
     @camera.updateProjectionMatrix()

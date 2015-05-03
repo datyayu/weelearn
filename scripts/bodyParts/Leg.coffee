@@ -5,6 +5,7 @@ class Leg extends BodyPart
   constructor: (config) ->
     config = {} unless config
 
+    # Set up config object.
     config.height   = 50 unless config.height
     config.width    = 12 unless config.width
     config.depth    = 12 unless config.depth
