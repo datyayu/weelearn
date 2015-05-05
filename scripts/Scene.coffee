@@ -24,7 +24,7 @@ class Scene
 
     # Add camera to scene
     @scene.add @camera
-    @camera.position.z = 300
+    @camera.position.set 0, 0, 200
 
     # Set background
     @renderer.setClearColor @bgColor, 1
@@ -58,17 +58,28 @@ class Scene
   getChildren: ->
     @scene.children
 
+  # Get scene height.
+  getHeight: ->
+    @renderer.domElement.height
+
+
+  # Get scene width.
+  getWidth: ->
+    @renderer.domElement.width
+
 
   # Render the scene using requestAnimationFrame.
   render: ->
-	  @renderer.render @scene, @camera
+	  @renderer.render(@scene, @camera)
 
 
-  # Resize the viewport and update the scene matrix. 
-  resize: (newSize) ->
-    @renderer.setSize newSize.width, newSize.height
-    @camera.aspect = newSize.width / newSize.height
+  # Resize the viewport and update the scene matrix.
+  resize: (width, height) ->
+    @renderer.setSize(width, height)
+    @camera.aspect = width / height
     @camera.updateProjectionMatrix()
+    # @camera.position.set 0, 0, 200
+
 
 
   # Add controls to the scene based on a given callback.

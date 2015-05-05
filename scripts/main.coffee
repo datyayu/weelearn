@@ -11,9 +11,10 @@ textElement.size = textElement.style.height = 50
 # Scene properties configuration.
 scene = {}
 sceneConfig =
-  width: window.innerWidth
+  bgColor: 0x060C0D
   # That last -4 removes the scroll bars on chrome, don't know why tho.
   height: window.innerHeight - textElement.size - 4
+  width: window.innerWidth
 
 # Projection elements.
 selectedElement = null
@@ -37,7 +38,7 @@ init = ->
   # Initalize components
   scene       = new Scene(sceneConfig)
   raycaster   = new THREE.Raycaster()
-  mouseVector = new THREE.Vector2()
+  mouseVector = new THREE.Vector3()
   light       = new THREE.HemisphereLight(0x888888)
 
   # Setup scene
@@ -55,6 +56,8 @@ init = ->
 
   # Add lights
   scene.add light
+
+  textElement.innerText = "Toca la parte a conocer"
 
   # Start the rendering loop.
   animate()
@@ -91,10 +94,19 @@ onMouseUp = (event) ->
     selectedElement = null
 
 
+# Window resize handler.
+onWindowResize = (event) ->
+  sceneConfig.height = window.innerHeight - textElement.size - 4
+  sceneConfig.width  = window.innerWidth
+
+  scene.resize sceneConfig.width, sceneConfig.height
+  render()
+
 
 # Event listeners.
 window.addEventListener "mousedown", onMouseDown, false
 window.addEventListener "mouseup", onMouseUp, false
+window.addEventListener "resize", onWindowResize, false
 
 
 # Start app.

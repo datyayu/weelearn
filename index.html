@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta charset="UTF-8">
 	<title>Sample</title>
 	<style>
-		html, body, div, canvas {margin:0; padding: 0;}
-		#text {font-size: 1.5em; text-align: center;}
+		html, body, div, canvas {margin:0; padding: 0}
+		#text {
+			display: block;
+			background: white;
+			color: black;
+			font-size: 2em;
+			width: 100vw;
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
 		<audio id="audio"></audio>
 		<div id="canvas"></div>
-		<div id="text">Haz click en el cuerpo para conocer la parte</div>
+		<div id="text">Cargando...</div>
 
     <script src="/webpack-dev-server.js"></script>
 		<script src="/assets/bundle.js">

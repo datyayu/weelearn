@@ -14,6 +14,7 @@ class BodyPart
     @audioUrl = config.audioUrl or null
     @position = config.position or null
     @reverse  = config.reverse or no
+    @id       = Math.random() * 100000
 
 
     # Set up three.js representation.
@@ -44,6 +45,9 @@ class BodyPart
     audioElement.load()
     audioElement.play()
 
+
+  setHexColor: (color) ->
+    @threeElement.object.material.color.setHex color
 
 
 module.exports = BodyPart
