@@ -1,7 +1,7 @@
 THREE = require "three"
 
 
-sphereFactory = (radius, segments, rings, color) ->
+Ball = (radius, segments, rings, color) ->
   geometry = new THREE.SphereGeometry radius, segments, rings
   material = new THREE.MeshLambertMaterial {color: color}
 
@@ -9,4 +9,4 @@ sphereFactory = (radius, segments, rings, color) ->
 
 
 
-module.exports = sphereFactory
+module.exports = Ball

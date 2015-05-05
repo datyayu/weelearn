@@ -7,14 +7,14 @@ class Scene
     config = {} unless config
 
     # Scene config
-    @width  = config.width or 400
-    @height = config.height or 300
-    @bgColor = config.bgColor or 0xffffff
+    @width  = config.width    or 400
+    @height = config.height   or 300
+    @bgColor = config.bgColor or 0x000000
 
     # Camera config
     @viewAngle = config.viewAngle or 90
-    @near      = config.near or 0.1
-    @far       = config.far or 10000
+    @near      = config.near      or 0.1
+    @far       = config.far       or 10000
     @aspect    = @width / @height
 
     # Create the THREE Elements
@@ -27,7 +27,7 @@ class Scene
     @camera.position.set 0, 0, 200
 
     # Set background
-    @renderer.setClearColor @bgColor, 1
+    @renderer.setClearColor @bgColor
     @renderer.setPixelRatio window.devicePixelRatio
 
 

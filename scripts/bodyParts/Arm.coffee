@@ -4,17 +4,18 @@ Hand     = require "./Hand"
 
 class Arm extends BodyPart
   constructor: (config) ->
-    config = {} unless config?
+    config ?= {}
 
     # Setup the config object.
-    config.height    = 16 unless config.height?
-    config.width     = 50 unless config.width?
-    config.depth     = 16 unless config.depth?
-    config.color     = 0xFFFF00 unless config.color?
-    config.message   = "Brazo" unless config.message?
-    config.position  = {x:45, y:10, z:0} unless config.position?
-    config.audioUrl  = "./assets/audio/Brazo.m4a" unless config.audioUrl?
+    config.height    ?= 16
+    config.width     ?= 50
+    config.color     ?= 0xFFFF00
+    config.depth     ?= 16
+    config.message   ?= "Brazo"
+    config.position  ?= {x:45, y:10, z:0}
+    config.audioUrl  ?= "./assets/audio/Brazo.m4a"
 
+    # Parent constructor
     super config
 
     # Rotate the arm PI rads (180deg).
@@ -23,26 +24,26 @@ class Arm extends BodyPart
       @threeElement.position.x = -config.position.x
 
     # Add a hand
-    if config.includeHand
-      @addHand()
+    @addHand() if config.includeHand
 
 
   # Adds a hand element to the arm three.js thelement.
   addHand: ->
     # Create a new hand
-    @hand = new Hand(
+    handConfig =
       reverse: @reverse
       parent:
         position: @position
         width: @width
-    )
+
+    hand = new Hand(handConfig)
 
     # Add it to the arm element
+    @threeElement.add hand.threeElement
     # NOTE: the hand element default positions are setup
     # to be used on the main scene. If you plan to use
     # it directly on the arm element, you should specify
     # your own proper coordinates relative to the arm.
-    @threeElement.add @hand.threeElement
 
 
 

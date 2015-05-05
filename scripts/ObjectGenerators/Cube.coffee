@@ -1,7 +1,7 @@
 THREE = require "three"
 
 
-cubeFactory = (width, height, depth, color) ->
+Cube = (width, height, depth, color) ->
   geometry = new THREE.BoxGeometry width, height, depth
   material = new THREE.MeshLambertMaterial {color: color}
 
@@ -9,4 +9,4 @@ cubeFactory = (width, height, depth, color) ->
 
 
 
-module.exports = cubeFactory
+module.exports = Cube

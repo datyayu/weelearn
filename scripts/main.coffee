@@ -2,6 +2,11 @@ THREE  = require "three"
 Scene  = require "./Scene"
 actors = require "./actors"
 
+
+###########################
+##        CONFIGS        ## 
+###########################
+
 # Audio element
 audioElement = document.getElementById "audio"
 # Text element
@@ -11,9 +16,8 @@ textElement.size = textElement.style.height = 50
 # Scene properties configuration.
 scene = {}
 sceneConfig =
-  bgColor: 0x060C0D
-  # That last -4 removes the scroll bars on chrome, don't know why tho.
-  height: window.innerHeight - textElement.size - 4
+  bgColor: 0x000000
+  height: window.innerHeight - textElement.size
   width: window.innerWidth
 
 # Projection elements.
@@ -21,6 +25,10 @@ selectedElement = null
 mouseVector = {}
 raycaster = {}
 
+
+###########################
+##       MAIN APP        ##
+###########################
 
 # Render the scene.
 render = ->
@@ -63,14 +71,13 @@ init = ->
   animate()
 
 
-# Mouse down handler.
-onMouseDown = (event) ->
-  event.preventDefault()
 
-  # Mouse position.
-  mouseVector.x = ( event.clientX / sceneConfig.width ) * 2 - 1
-  mouseVector.y = - ( event.clientY / sceneConfig.height ) * 2 + 1
+###########################
+##    EVENT HANDLERS     ##
+###########################
 
+# Check if there was any intersection.
+detectIntersects = ->
   # Check for intersections on raycastering.
   raycaster.setFromCamera mouseVector, scene.getCamera()
   intersects = raycaster.intersectObjects scene.getChildren()
@@ -84,8 +91,31 @@ onMouseDown = (event) ->
     selectedElement.object.originClassInstance.playSound audioElement
 
 
+# Mouse down handler.
+onMouseDown = (event) ->
+  event.preventDefault()
+
+  # Mouse position.
+  mouseVector.x = ( event.clientX / sceneConfig.width ) * 2 - 1
+  mouseVector.y = - ( event.clientY / sceneConfig.height ) * 2 + 1
+
+  detectIntersects()
+
+
+# Touch start handler.
+onTouchStart = (event) ->
+
+  event.preventDefault()
+
+  # Mouse position.
+  mouseVector.x = ( event.touches[0].pageX/ sceneConfig.width ) * 2 - 1
+  mouseVector.y = - ( event.touches[0].pageY / sceneConfig.height ) * 2 + 1
+
+  detectIntersects()
+
+
 # Mouse up handler.
-onMouseUp = (event) ->
+onPressEnd = (event) ->
   event.preventDefault()
 
   # Return all to normal.
@@ -96,19 +126,21 @@ onMouseUp = (event) ->
 
 # Window resize handler.
 onWindowResize = (event) ->
-  sceneConfig.height = window.innerHeight - textElement.size - 4
+  sceneConfig.height = window.innerHeight - textElement.size
   sceneConfig.width  = window.innerWidth
 
   scene.resize sceneConfig.width, sceneConfig.height
   render()
 
 
-# Event listeners.
-window.addEventListener "mousedown", onMouseDown, false
-window.addEventListener "mouseup", onMouseUp, false
-window.addEventListener "resize", onWindowResize, false
 
 
 # Start app.
 window.onload = ->
+# Event listeners.
+  window.addEventListener "touchstart", onTouchStart, false
+  window.addEventListener "touchend", onPressEnd, false
+  window.addEventListener "mousedown", onMouseDown, false
+  window.addEventListener "mouseup", onPressEnd, false
+  window.addEventListener "resize", onWindowResize, false
   init()
