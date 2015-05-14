@@ -1,10 +1,11 @@
 THREE  = require "three"
+_      = require "lodash"
 Scene  = require "./Scene"
-actors = require "./actors"
+Actors = require "./actors"
 
 
 ###########################
-##        CONFIGS        ## 
+##        CONFIGS        ##
 ###########################
 
 # Audio element
@@ -16,7 +17,7 @@ textElement.size = textElement.style.height = 50
 # Scene properties configuration.
 scene = {}
 sceneConfig =
-  bgColor: 0x000000
+  bgColor: 0xFFFFFF
   height: window.innerHeight - textElement.size
   width: window.innerWidth
 
@@ -54,13 +55,15 @@ init = ->
   scene.appendTo "canvas"
 
   # Add actors to scene
-  for actor in actors
-    scene.add actor.getElement()
-    children = actor.getElementChildren()
-
-    # Add childs inside every actor
-    for child in children
-      scene.add child
+  # for actor in actors
+  #   scene.add actor.getElement()
+  #   children = actor.getElementChildren()
+  #
+  #   # Add childs inside every actor
+  #   for child in children
+  #     scene.add child
+  Actors (actor) =>
+    scene.add actor
 
   # Add lights
   scene.add light
@@ -85,8 +88,7 @@ detectIntersects = ->
 
   # Show intersected element (if it exists).
   if selectedElement?
-    selectedElement.originalHEX = selectedElement.object.material.color.getHex()
-    selectedElement.object.material.color.set 0x00FF00
+    selectedElement.object.originClassInstance.setHexColor 0x00FF00
     textElement.innerText = selectedElement.object.originClassInstance.getMessage()
     selectedElement.object.originClassInstance.playSound audioElement
 
@@ -104,7 +106,6 @@ onMouseDown = (event) ->
 
 # Touch start handler.
 onTouchStart = (event) ->
-
   event.preventDefault()
 
   # Mouse position.
@@ -120,8 +121,11 @@ onPressEnd = (event) ->
 
   # Return all to normal.
   if selectedElement?
-    selectedElement.object.material.color.setHex selectedElement.originalHEX
+    element = _.clone selectedElement
     selectedElement = null
+    setTimeout ->
+      element.object.originClassInstance.setHexColor()
+    , 500
 
 
 # Window resize handler.
@@ -137,7 +141,7 @@ onWindowResize = (event) ->
 
 # Start app.
 window.onload = ->
-# Event listeners.
+  # Event listeners.
   window.addEventListener "touchstart", onTouchStart, false
   window.addEventListener "touchend", onPressEnd, false
   window.addEventListener "mousedown", onMouseDown, false

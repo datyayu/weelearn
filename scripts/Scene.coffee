@@ -19,12 +19,12 @@ class Scene
 
     # Create the THREE Elements
     @renderer = new THREE.WebGLRenderer({alpha: yes})
-    @camera   = new THREE.PerspectiveCamera(@camera, @aspect, @near, @far)
+    @camera   = new THREE.PerspectiveCamera(@viewAngle, @aspect, @near, @far)
     @scene    = new THREE.Scene()
 
     # Add camera to scene
     @scene.add @camera
-    @camera.position.set 0, 0, 200
+    @camera.position.set 0, 0, 8
 
     # Set background
     @renderer.setClearColor @bgColor

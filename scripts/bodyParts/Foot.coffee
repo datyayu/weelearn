@@ -1,16 +1,16 @@
 BodyPart = require "./BodyPart"
 
 
-class Hand extends BodyPart
+class Foot extends BodyPart
   constructor: (config) ->
     config ?= {}
 
     # Setup config object.
-    config.message  ?= "Mano"
-    config.audioUrl ?= "./assets/audio/Mano.m4a"
+    config.message  ?= "Pie"
+    config.audioUrl ?= "./assets/audio/Pie.m4a"
 
     # Parent constructor
     super config
 
 
-module.exports = Hand
+module.exports = Foot
