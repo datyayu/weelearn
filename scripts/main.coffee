@@ -13,16 +13,16 @@ config =
   onTouchColor: 0x00FF00
   onTouchDelay: 500
 
-# Scene properties configuration.
-sceneConfig =
-  bgColor: 0xFFFFFF
-  height:  window.innerHeight - textElement.size
-  width:   window.innerWidth
-
 # DOM elements.
 audioElement = document.getElementById "audio"
 textElement  = document.getElementById "text"
 textElement.size = textElement.style.height = 50
+
+# Scene properties configuration.
+sceneConfig =
+  bgColor: 0x000000
+  height:  window.innerHeight - textElement.size
+  width:   window.innerWidth
 
 # Projection elements.
 intersectedElement = null

@@ -31,7 +31,7 @@ class BodyPart
   # Return which part of the body is.
   # @return {string} Text with the body part name.
   getMessage: ->
-    @message
+    @_message
 
 
   # Play audio track telling which part of the body is from.

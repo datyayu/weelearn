@@ -1,8 +1,11 @@
+var path = require("path");
+
+
 module.exports = {
 
   entry: "./scripts/main.coffee",
   output: {
-    path: __dirname,
+    path: path.join(__dirname, 'assets'),
     publicPath: "/assets/",
     filename: "bundle.js"
   },
