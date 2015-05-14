@@ -3,6 +3,8 @@ Hand     = require "./Hand"
 
 
 class Arm extends BodyPart
+  # Constructor
+  # @params {Object} config List of the instance's properties.
   constructor: (config) ->
     config ?= {}
 
@@ -14,4 +16,6 @@ class Arm extends BodyPart
     super config
 
 
+
+# Export the class.
 module.exports = Arm

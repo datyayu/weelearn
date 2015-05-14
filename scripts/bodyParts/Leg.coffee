@@ -2,6 +2,8 @@ BodyPart = require "./BodyPart"
 
 
 class Leg extends BodyPart
+  # Constructor
+  # @params {Object} config List of the instance's properties.
   constructor: (config) ->
     config ?= {}
 
@@ -14,4 +16,5 @@ class Leg extends BodyPart
 
 
 
+# Export the class.
 module.exports = Leg

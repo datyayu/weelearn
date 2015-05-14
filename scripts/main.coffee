@@ -1,30 +1,34 @@
-THREE  = require "three"
-_      = require "lodash"
-Scene  = require "./Scene"
-Actors = require "./actors"
+THREE     = require "three"
+_         = require "lodash"
+Scene     = require "./Scene"
+AddActors = require "./actors"
 
 
 ###########################
 ##        CONFIGS        ##
 ###########################
-
-# Audio element
-audioElement = document.getElementById "audio"
-# Text element
-textElement = document.getElementById "text"
-textElement.size = textElement.style.height = 50
+# App config.
+config =
+  bodyColor:    0xFFE0BD
+  onTouchColor: 0x00FF00
+  onTouchDelay: 500
 
 # Scene properties configuration.
-scene = {}
 sceneConfig =
   bgColor: 0xFFFFFF
-  height: window.innerHeight - textElement.size
-  width: window.innerWidth
+  height:  window.innerHeight - textElement.size
+  width:   window.innerWidth
+
+# DOM elements.
+audioElement = document.getElementById "audio"
+textElement  = document.getElementById "text"
+textElement.size = textElement.style.height = 50
 
 # Projection elements.
-selectedElement = null
+intersectedElement = null
+scene       = {}
 mouseVector = {}
-raycaster = {}
+raycaster   = {}
 
 
 ###########################
@@ -51,23 +55,17 @@ init = ->
   light       = new THREE.HemisphereLight(0x888888)
 
   # Setup scene
-  scene.setControls {renderCallback: render}
+  scene.setControls render
   scene.appendTo "canvas"
 
-  # Add actors to scene
-  # for actor in actors
-  #   scene.add actor.getElement()
-  #   children = actor.getElementChildren()
-  #
-  #   # Add childs inside every actor
-  #   for child in children
-  #     scene.add child
-  Actors (actor) =>
+  # Add each actor.
+  AddActors (actor) =>
     scene.add actor
 
   # Add lights
   scene.add light
 
+  # Change the text.
   textElement.innerText = "Toca la parte a conocer"
 
   # Start the rendering loop.
@@ -83,24 +81,28 @@ init = ->
 detectIntersects = ->
   # Check for intersections on raycastering.
   raycaster.setFromCamera mouseVector, scene.getCamera()
-  intersects = raycaster.intersectObjects scene.getChildren()
-  selectedElement = intersects[0]
+  intersects         = raycaster.intersectObjects scene.getChildren()
+  intersectedElement = intersects[0] # We only want the first intersection.
 
   # Show intersected element (if it exists).
-  if selectedElement?
-    selectedElement.object.originClassInstance.setHexColor 0x00FF00
-    textElement.innerText = selectedElement.object.originClassInstance.getMessage()
-    selectedElement.object.originClassInstance.playSound audioElement
+  if intersectedElement?
+    # Change color to show touched element.
+    intersectedElement.object.originClassInstance.setColor config.onTouchColor
+    # Show element name on textElement.
+    textElement.innerText = intersectedElement.object.originClassInstance.getMessage()
+    # Play soundfile with the element name on audioElement.
+    intersectedElement.object.originClassInstance.playSound audioElement
 
 
 # Mouse down handler.
 onMouseDown = (event) ->
   event.preventDefault()
 
-  # Mouse position.
+  # Update touch/mouse position.
   mouseVector.x = ( event.clientX / sceneConfig.width ) * 2 - 1
   mouseVector.y = - ( event.clientY / sceneConfig.height ) * 2 + 1
 
+  # Check for intersects
   detectIntersects()
 
 
@@ -108,10 +110,11 @@ onMouseDown = (event) ->
 onTouchStart = (event) ->
   event.preventDefault()
 
-  # Mouse position.
+  # Update touch/mouse position.
   mouseVector.x = ( event.touches[0].pageX/ sceneConfig.width ) * 2 - 1
   mouseVector.y = - ( event.touches[0].pageY / sceneConfig.height ) * 2 + 1
 
+  # Check for intersects.
   detectIntersects()
 
 
@@ -120,19 +123,25 @@ onPressEnd = (event) ->
   event.preventDefault()
 
   # Return all to normal.
-  if selectedElement?
-    element = _.clone selectedElement
-    selectedElement = null
+  if intersectedElement?
+    # Create a copy of the element for async handling and
+    # remove original to allow other parts to be touched.
+    elementReference   = _.clone intersectedElement
+    intersectedElement = null
+
+    # Show the touched part for a certain period of time.
     setTimeout ->
-      element.object.originClassInstance.setHexColor()
-    , 500
+      elementReference.object.originClassInstance.setColor(config.bodyColor)
+    , config.onTouchDelay
 
 
 # Window resize handler.
 onWindowResize = (event) ->
+  # Get new size for the window
   sceneConfig.height = window.innerHeight - textElement.size
   sceneConfig.width  = window.innerWidth
 
+  # Re-render using the new window size.
   scene.resize sceneConfig.width, sceneConfig.height
   render()
 
@@ -141,10 +150,12 @@ onWindowResize = (event) ->
 
 # Start app.
 window.onload = ->
-  # Event listeners.
-  window.addEventListener "touchstart", onTouchStart, false
-  window.addEventListener "touchend", onPressEnd, false
-  window.addEventListener "mousedown", onMouseDown, false
-  window.addEventListener "mouseup", onPressEnd, false
-  window.addEventListener "resize", onWindowResize, false
+  # Add event listeners.
+  window.addEventListener "touchstart", onTouchStart  , false
+  window.addEventListener "mousedown" , onMouseDown   , false
+  window.addEventListener "touchend"  , onPressEnd    , false
+  window.addEventListener "mouseup"   , onPressEnd    , false
+  window.addEventListener "resize"    , onWindowResize, false
+
+  # Start app.
   init()

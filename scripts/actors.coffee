@@ -9,6 +9,7 @@ Foot  = require "./bodyParts/Foot"
 ###########################
 ##        ACTORS         ##
 ###########################
+
 # Head
 head = new Head(
   model: "assets/models/head.js"
@@ -49,7 +50,6 @@ leftLeg = new Leg(
 rightLeg = new Leg(
   model: "assets/models/right_leg.js"
   position: {x:.05, y:-4.5, z:0}
-  # position: {x:-5.25, y:.2, z:.02}
 )
 
 # Feet
@@ -62,6 +62,10 @@ rightFoot = new Foot(
   position: {x:.05, y:-4.42, z:0}
 
 )
+
+###########################
+##        EXPORTS        ##
+###########################
 
 # List the actors to be exported
 actors = [
@@ -77,12 +81,15 @@ actors = [
   rightFoot
 ]
 
-
-# Execute the callback with each actor after its threejs element it's created.
+# Execute the callback with each actor after its threejs element
+# has been properly created.
+# @param {function} callback Callback to be executed after each
+#                            actor's 3D representation it's created.
 addActors = (callback) ->
   for actor in actors
-    actor.setModel(callback)
+    actor.setModel callback
 
 
 
+# Export the main function.
 module.exports = addActors
