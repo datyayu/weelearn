@@ -10,7 +10,7 @@ class Arm extends BodyPart
 
     # Setup the config object.
     config.message   ?= "Brazo"
-    config.audioUrl  ?= "./assets/audio/Brazo.m4a"
+    config.audioUrl  ?= "./assets/audio/brazo.mp3"
 
     # Parent constructor
     super config

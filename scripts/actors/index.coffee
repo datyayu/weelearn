@@ -1,10 +1,10 @@
 THREE = require "three"
-Head  = require "./bodyParts/Head"
-Torso = require "./bodyParts/Torso"
-Arm   = require "./bodyParts/Arm"
-Hand  = require "./bodyParts/Hand"
-Leg   = require "./bodyParts/Leg"
-Foot  = require "./bodyParts/Foot"
+Head  = require "./Head"
+Torso = require "./Torso"
+Arm   = require "./Arm"
+Hand  = require "./Hand"
+Leg   = require "./Leg"
+Foot  = require "./Foot"
 
 ###########################
 ##        ACTORS         ##

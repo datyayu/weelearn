@@ -9,7 +9,7 @@ class Leg extends BodyPart
 
     # Set up config object.
     config.message  ?= "Pierna"
-    config.audioUrl ?= "./assets/audio/Pierna.m4a"
+    config.audioUrl ?= "./assets/audio/pierna.mp3"
 
     # Parent constructor
     super config

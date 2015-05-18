@@ -26,7 +26,7 @@ class Scene
 
     # Add camera to scene.
     @_scene.add @_camera
-    @_camera.position.set 0, 0, 8
+    @_camera.position.set 0, 0, 6
 
     # Set background.
     @_renderer.setClearColor @_bgColor
