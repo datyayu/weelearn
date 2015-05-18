@@ -10,8 +10,8 @@ To install just do the usual ```$ npm install ``` and run using ```$ webpack-dev
   - [x] <s>Make each body part clickeable.</s>
   - [x] <s>Add support for sound.</s>
   - [x] <s>Replace Cube elements for proper body-like meshes.</s>
-  - [ ] Add proper voices.
-  - [ ] Add a cool background.
+  - [x] <s>Add proper voices.</s>
+  - [ ] Add a cool background. (Nothing seems to fit yet)
   - [ ] Add a config menu.
 
 
