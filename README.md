@@ -13,11 +13,11 @@ To install just do the usual ```$ npm install ``` and run using ```$ webpack-dev
   - [x] <s>Add proper voices.</s>
   - [ ] Split mesh properly into more parts.
   - [ ] Add BG music @ low volume.
-  - [ ] Change mesh.
-  - [ ] Create intro menu.
+  - [ ] Change mesh material for the original one.
+  - [ ] Create intro-to-app menu.
   - [ ] Add a config menu.
-  - [ ] Add a cool background. (Nothing seems to fit yet)
   - [ ] Use buttons to handle rotation/zoom/movement.
+  - [ ] Create several levels based on the kid's autism level.
 
 
 
