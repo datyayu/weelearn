@@ -2,7 +2,7 @@ THREE        = require "three"
 _            = require "lodash"
 Scene        = require "./Scene"
 EventHandler = require "./EventHandler"
-AddActors    = require "./actors"
+actors    = require "./actors"
 config       = require "./config"
 
 # Scene global instance.
@@ -32,8 +32,9 @@ init = ->
   scene.appendTo config.scene.canvas
 
   # Add each actor.
-  AddActors (actor) =>
-    scene.add actor
+  for eachActor in actors
+    eachActor.setModel (actor) =>
+      scene.add actor
 
   # Add lights
   scene.add light

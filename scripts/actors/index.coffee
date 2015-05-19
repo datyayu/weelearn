@@ -81,15 +81,6 @@ actors = [
   rightFoot
 ]
 
-# Execute the callback with each actor after its threejs element
-# has been properly created.
-# @param {function} callback Callback to be executed after each
-#                            actor's 3D representation it's created.
-addActors = (callback) ->
-  for actor in actors
-    actor.setModel callback
-
-
 
 # Export the main function.
-module.exports = addActors
+module.exports = actors
