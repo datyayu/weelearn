@@ -52,8 +52,10 @@ class BodyPart
       # Create the 3D Mesh.
       skinMaterial   = new THREE.MeshLambertMaterial({color: @_bodyColor})
       @_threeElement = new THREE.Mesh(geometry, skinMaterial)
+
       # Set its position.
       @_threeElement.position.set @_position.x, @_position.y, @_position.z
+
       # Add on the THREE.js element a reference to the instance
       # where the element was created so it can be access when dealing
       # with stuff like intersections.

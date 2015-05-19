@@ -8,9 +8,9 @@ class Arm extends BodyPart
   constructor: (config) ->
     config ?= {}
 
-    # Setup the config object.
-    config.message   ?= "Brazo"
-    config.audioUrl  ?= "./assets/audio/brazo.mp3"
+    # Set up the config object.
+    config.message  ?= "Brazo"
+    config.audioUrl ?= "./assets/audio/brazo.mp3"
 
     # Parent constructor
     super config

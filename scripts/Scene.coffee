@@ -41,10 +41,9 @@ class Scene
 
   # Draw the scene onto a given element based on its id.
   # @param {String} canvasId An Html node's id to draw scene on.
-  appendTo: (canvasId) ->
+  appendTo: (canvas) ->
     @_renderer.setSize @_width, @_height
 
-    canvas = document.getElementById canvasId
     canvas.appendChild @_renderer.domElement
 
 
@@ -60,6 +59,18 @@ class Scene
     @_scene.children
 
 
+  # Get the scene canvas' height
+  # @return {Number} Canvas height in pixels
+  getHeight: ->
+    @_height
+
+
+  # Get the scene canvas' width
+  # @return {Number} Canvas width in pixels
+  getWidth: ->
+    @_width
+
+
   # Render the scene using requestAnimationFrame.
   render: ->
 	  @_renderer.render(@_scene, @_camera)
@@ -69,9 +80,11 @@ class Scene
   # @params {Number} width  Canvas new width.
   # @params {Number} height Canvas new height.
   resize: (width, height) ->
-    @_renderer.setSize width, height
+    @_width  = width
+    @_height = height
 
-    @_camera.aspect = width / height
+    @_renderer.setSize @_width, @_height
+    @_camera.aspect = @_width / @_height
     @_camera.updateProjectionMatrix()
 
 

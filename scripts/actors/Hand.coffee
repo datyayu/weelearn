@@ -7,7 +7,7 @@ class Hand extends BodyPart
   constructor: (config) ->
     config ?= {}
 
-    # Setup config object.
+    # Set up config object.
     config.message  ?= "Mano"
     config.audioUrl ?= "./assets/audio/mano.mp3"
 

@@ -7,7 +7,7 @@ class Foot extends BodyPart
   constructor: (config) ->
     config ?= {}
 
-    # Setup config object.
+    # Set up config object.
     config.message  ?= "Pie"
     config.audioUrl ?= "./assets/audio/pie.mp3"
 
