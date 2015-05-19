@@ -68,6 +68,12 @@ rightFoot = new Foot(
 ###########################
 
 # List the actors to be exported
+# TODO: Split/Add:
+# - Chest.
+# - Back.
+# - Head.
+# - Face.
+# - Genitalia (name pendant)?
 actors = [
   head
   torso

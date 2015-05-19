@@ -2,7 +2,7 @@ THREE        = require "three"
 _            = require "lodash"
 Scene        = require "./Scene"
 EventHandler = require "./EventHandler"
-actors    = require "./actors"
+actors       = require "./actors"
 config       = require "./config"
 
 # Scene global instance.
@@ -40,7 +40,7 @@ init = ->
   scene.add light
 
   # Change the text.
-  config.eventHandler.text = "Toca la parte a conocer"
+  config.eventHandler.elements.text.innerText = "Toca la parte a conocer"
 
   # Start the rendering loop.
   animate()

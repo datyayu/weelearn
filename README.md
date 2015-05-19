@@ -11,8 +11,13 @@ To install just do the usual ```$ npm install ``` and run using ```$ webpack-dev
   - [x] <s>Add support for sound.</s>
   - [x] <s>Replace Cube elements for proper body-like meshes.</s>
   - [x] <s>Add proper voices.</s>
-  - [ ] Add a cool background. (Nothing seems to fit yet)
+  - [ ] Split mesh properly into more parts.
+  - [ ] Add BG music @ low volume.
+  - [ ] Change mesh.
+  - [ ] Create intro menu.
   - [ ] Add a config menu.
+  - [ ] Add a cool background. (Nothing seems to fit yet)
+  - [ ] Use buttons to handle rotation/zoom/movement.
 
 
 
