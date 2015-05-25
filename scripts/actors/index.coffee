@@ -1,82 +1,66 @@
-THREE = require "three"
-Head  = require "./Head"
-Torso = require "./Torso"
-Arm   = require "./Arm"
-Hand  = require "./Hand"
-Leg   = require "./Leg"
-Foot  = require "./Foot"
+THREE   = require "three"
+Head    = require "./Head"
+Hair    = require "./Hair"
+Face    = require "./Face"
+Eyes    = require "./Eyes"
+Neck    = require "./Neck"
+Chest   = require "./Chest"
+Stomach = require "./Stomach"
+Arm     = require "./Arm"
+Hand    = require "./Hand"
+Leg     = require "./Leg"
+Foot    = require "./Foot"
 
 ###########################
 ##        ACTORS         ##
 ###########################
 
 # Head
-head = new Head(
-  model: "assets/models/head.js"
-  position: {x:0, y:-4.9, z:0}
-)
+head = new Head()
+hair = new Hair()
+face = new Face()
+eyes = new Eyes()
+neck = new Neck()
 
 # Torso
-torso = new Torso(
-  model: "assets/models/torso.js"
-  position: {x:0, y:-4.8, z:0}
-)
+chest   = new Chest({position:{x:0, y:-4.61, z:0}})
+stomach = new Stomach({position:{x:0, y:-4.50, z:0}})
 
 # Arms
-leftArm = new Arm (
-  model: "assets/models/left_arm.js"
-  position: {x:-.03, y:-4.8, z:0}
-)
-rightArm = new Arm (
-  model: "assets/models/right_arm.js"
-  position: {x:.03, y:-4.8, z:0}
-)
+rightArm = new Arm({position: {x: 0.01, y:-4.6, z:0}, side: "right"})
+leftArm  = new Arm({position: {x:-0.01, y:-4.6, z:0}, side: "left"})
 
 # Hands
-leftHand = new Hand(
-  model: "assets/models/left_hand.js"
-  position: {x:-0.07, y:-4.8, z:0}
-)
-rightHand = new Hand(
-  model: "assets/models/right_hand.js"
-  position: {x:0.07, y:-4.8, z:0}
-)
+rightHand = new Hand({side: "right"})
+leftHand  = new Hand({side: "left"})
 
 # Legs
-leftLeg = new Leg(
-  model: "assets/models/left_leg.js"
-  position: {x:-.05, y:-4.5, z:0}
-)
-rightLeg = new Leg(
-  model: "assets/models/right_leg.js"
-  position: {x:.05, y:-4.5, z:0}
-)
+rightLeg = new Leg({position: {x:-0.01, y:-4.5, z:0}, side: "right"})
+leftLeg  = new Leg({position: {x: 0.01, y:-4.5, z:0}, side: "left"})
 
 # Feet
-leftFoot = new Foot(
-  model: "assets/models/left_foot.js"
-  position: {x:-.05, y:-4.42, z:0}
-)
 rightFoot = new Foot(
-  model: "assets/models/right_foot.js"
-  position: {x:.05, y:-4.42, z:0}
-
+  position: {x:-0.01, y:-4.5, z:0}
+  bodyColor: 0x181009
+  side: "right"
+)
+leftFoot  = new Foot(
+  position: {x:-0.01, y:-4.5, z:0}
+  bodyColor: 0x181009
+  side: "left"
 )
 
 ###########################
 ##        EXPORTS        ##
 ###########################
-
-# List the actors to be exported
-# TODO: Split/Add:
-# - Chest.
-# - Back.
-# - Head.
-# - Face.
-# - Genitalia (name pendant)?
 actors = [
+  face
   head
-  torso
+  hair
+  eyes
+  neck
+  stomach
+  chest
   leftArm
   rightArm
   leftHand

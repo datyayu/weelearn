@@ -1,20 +1,20 @@
 BodyPart = require "./BodyPart"
 
 
-class Torso extends BodyPart
+class Hair extends BodyPart
   # Constructor
   # @params {Object} config List of the instance's properties.
   constructor: (config) ->
     config ?= {}
 
     # Set up config object.
-    config.message  ?= "Torso"
-    config.audioUrl ?= "./assets/audio/torso.mp3"
+    config.message  ?= "Cabello"
+    config.audioUrl ?= "./assets/audio/cabello.mp3"
+    config.model    ?= "./assets/models/hair.json"
 
     # Parent constructor
     super config
 
 
-
 # Export the class.
-module.exports = Torso
+module.exports = Hair

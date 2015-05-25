@@ -2,7 +2,7 @@ THREE = require "three"
 _     = require "lodash"
 
 
-# Check if there was any intersection.
+
 class EventHandler
   # Constructor
   constructor: (scene, renderCallback, config) ->
@@ -10,7 +10,7 @@ class EventHandler
     @_scene          = scene
     @_renderCallback = renderCallback
     @_onTouchDelay   = config.onTouchDelay   or 1000
-    @_onTouchColor   = config.onTouchColor   or 0x00FF00
+    @_onTouchColor   = config.onTouchColor   or {r:0, g:.8, b:0}
     @_bodyColor      = config.bodyColor      or 0xFFE0BD
     @_textElement    = config.elements.text  or null
     @_audioElement   = config.elements.audio or null

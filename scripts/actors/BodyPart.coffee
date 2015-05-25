@@ -8,12 +8,17 @@ class BodyPart
     config ?= {}
 
     # Set up object properties.
-    @_bodyColor = config.bodyColor or 0xFFE0BD
-    @_message   = config.message   or "Cuerpo"
-    @_model     = config.model     or null
-    @_audioUrl  = config.audioUrl  or null
-    @_model     = config.model     or null
-    @_position  = config.position  or {x:0,y:0,z:0}
+    @_bodyColor    = config.bodyColor or {
+      r: 0.9529411764705882
+      g: 0.7254901960784313
+      b: 0.5568627450980392
+    }
+    @_message      = config.message   or "Cuerpo"
+    @_model        = config.model     or null
+    @_audioUrl     = config.audioUrl  or null
+    @_model        = config.model     or null
+    @_position     = config.position  or {x:0,y:-4.6,z:0}
+    @_meshMaterial = config.meshMaterial or "Face"
 
 
   # Return the THREE.js 3D representation reference of the body part.
@@ -48,11 +53,20 @@ class BodyPart
   setModel: (callback) ->
     loader = new THREE.JSONLoader()
 
-    loader.load @_model, (geometry) =>
-      # Create the 3D Mesh.
-      skinMaterial   = new THREE.MeshLambertMaterial({color: @_bodyColor})
-      @_threeElement = new THREE.Mesh(geometry, skinMaterial)
+    loader.load @_model, (geometry, materials) =>
+      skinMaterial = {}
 
+      # Pick material.
+      if @_meshMaterial is "Lambert"
+        skinMaterial   = new THREE.MeshPhongMaterial()
+        @_threeElement = new THREE.Mesh(geometry, skinMaterial)
+        @_threeElement.material.color = @_bodyColor
+      else
+        skinMaterial   = new THREE.MeshFaceMaterial(materials)
+        @_threeElement = new THREE.Mesh(geometry, skinMaterial)
+        @_bodyColor    = materials[0].color
+
+      # Create the 3D Mesh.
       # Set its position.
       @_threeElement.position.set @_position.x, @_position.y, @_position.z
 
@@ -68,8 +82,10 @@ class BodyPart
   # @param {Number} A HEX RGB representation of the color.
   setColor: (color) ->
     color ?= @_bodyColor
-    @_threeElement.material.color.setHex color
-
+    if @_meshMaterial is "Lambert"
+      @_threeElement.material.color = color
+    else
+      @_threeElement.material.materials[0].color = color
 
 
 # Export the class.

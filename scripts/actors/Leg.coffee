@@ -11,6 +11,11 @@ class Leg extends BodyPart
     config.message  ?= "Pierna"
     config.audioUrl ?= "./assets/audio/pierna.mp3"
 
+    if config.side is "left"
+      config.model ?= "./assets/models/left_leg.json"
+    else
+      config.model ?= "./assets/models/right_leg.json"
+
     # Parent constructor
     super config
 
