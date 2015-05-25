@@ -10,11 +10,11 @@ class Arm extends BodyPart
 
     # Set up the config object.
     config.message  ?= "Brazo"
-    config.audioUrl ?= "./assets/audio/brazo.mp3"
+    config.audioUrl ?= "/assets/audio/brazo.mp3"
     if config.side is "left"
-      config.model = "./assets/models/left_arm.json"
+      config.model = "/assets/models/left_arm.json"
     else
-      config.model = "./assets/models/right_arm.json"
+      config.model = "/assets/models/right_arm.json"
 
     # Parent constructor
     super config

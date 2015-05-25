@@ -1,5 +1,5 @@
 THREE = require "three"
-require "../libs/OrbitControls"
+require "../../libs/OrbitControls"
 
 
 class Scene

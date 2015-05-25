@@ -3,7 +3,7 @@ var path = require("path");
 
 module.exports = {
 
-  entry: "./scripts/main.coffee",
+  entry: "./scripts/index.cjsx",
   output: {
     path: path.join(__dirname, 'assets'),
     publicPath: "/assets/",
@@ -12,11 +12,12 @@ module.exports = {
 
 	module: {
 		loaders: [
-			{ test: /\.coffee$/, loader: "coffee" }
+      { test: /\.coffee$/, loader: "coffee" },
+			{ test: /\.cjsx$/, loader: "coffee-jsx-loader" }
 		]
 	},
 
 	resolve: {
-		extensions: ["", ".web.coffee", ".web.js", ".coffee", ".js"]
+		extensions: ["", ".web.coffee", ".web.js", ".coffee", ".js", ".cjsx"]
 	}
 }

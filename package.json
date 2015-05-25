@@ -1,21 +1,39 @@
 {
   "name": "weelearn",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A HTML5 + Three.js app to help kids learn the body parts",
   "main": "index.html",
   "dependencies": {
     "lodash": "^3.8.0",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "stylus-font-awesome": "0.0.1",
     "three": "^0.71.0"
   },
   "devDependencies": {
-    "coffee-script": "^1.9.2",
+    "coffee-jsx-loader": "^0.1.2",
     "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.9.2",
+    "gulp": "^3.8.11",
+    "gulp-browserify": "^0.5.1",
+    "gulp-cjsx": "^3.0.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-connect": "^2.2.0",
+    "gulp-flatten": "0.0.4",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-stylus": "^2.0.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.4",
+    "gulp-webpack": "^1.4.0",
+    "nib": "^1.1.0",
     "webpack": "^1.8.10",
     "webpack-dev-server": "^1.8.2"
   },
-  "start": "webpack-dev-server",
+  "start": "gulp build",
   "scripts": {
-    "build": "webpack",
+    "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

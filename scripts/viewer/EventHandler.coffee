@@ -97,7 +97,7 @@ class EventHandler
   _onWindowResize: (event) ->
     # Get new size for the window
     height = window.innerHeight - @_textElement.size
-    width  = window.innerWidth
+    width  = window.innerWidth - 1
 
     # Re-render using the new window size.
     @_scene.resize width, height

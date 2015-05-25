@@ -3,7 +3,7 @@ _            = require "lodash"
 Scene        = require "./Scene"
 EventHandler = require "./EventHandler"
 actors       = require "./actors"
-config       = require "./config"
+Config       = require "./config"
 
 # Scene global instance.
 scene = {}
@@ -22,6 +22,7 @@ animate = ->
 
 # Initialize the app.
 init = ->
+  config = Config()
   # Initalize components
   scene        = new Scene(config.scene)
   eventHandler = new EventHandler(scene, render, config.eventHandler)
@@ -47,4 +48,4 @@ init = ->
 
 
 # Start app.
-window.onload = -> init()
+module.exports = init
