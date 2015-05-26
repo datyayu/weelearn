@@ -21,15 +21,25 @@ class EventHandler
     @_intersected = null
 
     # Add event listeners.
-    window.addEventListener "touchstart", @_onTouchStart.bind(this)  , false
-    window.addEventListener "mousedown" , @_onMouseDown.bind(this)   , false
-    window.addEventListener "touchend"  , @_onPressEnd.bind(this)    , false
-    window.addEventListener "mouseup"   , @_onPressEnd.bind(this)    , false
-    window.addEventListener "resize"    , @_onWindowResize.bind(this), false
+    window.addEventListener "touchstart", @_onTouchStart  , false
+    window.addEventListener "mousedown" , @_onMouseDown   , false
+    window.addEventListener "touchend"  , @_onPressEnd    , false
+    window.addEventListener "mouseup"   , @_onPressEnd    , false
+    window.addEventListener "resize"    , @_onWindowResize, false
+
+  removeListeners: =>
+    @_raycaster   = null
+    @_mouseVector = null
+    @_intersected = null
+    window.removeEventListener "touchstart", @_onTouchStart  , false
+    window.removeEventListener "mousedown" , @_onMouseDown   , false
+    window.removeEventListener "touchend"  , @_onPressEnd    , false
+    window.removeEventListener "mouseup"   , @_onPressEnd    , false
+    window.removeEventListener "resize"    , @_onWindowResize, false
 
 
   # Check for intersections on raycastering.
-  _detectIntersects: ->
+  _detectIntersects: =>
     @_raycaster.setFromCamera @_mouseVector, @_scene.getCamera()
     intersects    = @_raycaster.intersectObjects @_scene.getChildren()
     @_intersected = intersects[0] # We only want the first intersection.
@@ -47,13 +57,12 @@ class EventHandler
       if @_audioElement?
         @_intersected.object.originClassInstance.playSound @_audioElement
 
-
   ###########################
   ##    EVENT HANDLERS     ##
   ###########################
 
   # Mouse down handler.
-  _onMouseDown: (event) ->
+  _onMouseDown: (event) =>
     event.preventDefault()
 
     # Update mouse position.
@@ -65,8 +74,8 @@ class EventHandler
 
 
   # Touch start handler.
-  _onTouchStart: (event) ->
-    event.preventDefault()
+  _onTouchStart: (event) =>
+    # event.preventDefault()
 
     # Update touch position.
     @_mouseVector.x = ( event.touches[0].pageX/ @_scene.getWidth() ) * 2 - 1
@@ -77,7 +86,7 @@ class EventHandler
 
 
   # Mouse up handler.
-  _onPressEnd: (event) ->
+  _onPressEnd: (event) =>
     event.preventDefault()
 
     # Return all to normal.
@@ -94,7 +103,7 @@ class EventHandler
 
 
   # Window resize handler.
-  _onWindowResize: (event) ->
+  _onWindowResize: (event) =>
     # Get new size for the window
     height = window.innerHeight - @_textElement.size
     width  = window.innerWidth - 1

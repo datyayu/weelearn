@@ -1,0 +1,36 @@
+.ColorPicker-container
+  display flex
+  flex-flow row no-wrap
+  justify-content space-around
+
+.ColorPicker-color
+  transition .2s all ease-in-out
+  height 50px
+  width 50px
+  border 1px solid #A4A5EA
+  margin .2em
+
+  &.selected
+    border-width 3px
+@media screen and (min-width:500px)
+  .ColorPicker-color
+    height 75px
+    width 75px
+
+@media screen and (min-width:700px)
+  .ColorPicker-color
+    height 100px
+    width 100px
+    border 1px solid #A4A5EA
+
+    &.selected
+      border-width 3px
+
+@media screen and (min-width:700px)
+  .ColorPicker-color
+    height 100px
+    width 100px
+    border 1px solid #A4A5EA
+
+    &.selected
+      border-width 3px

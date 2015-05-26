@@ -3,26 +3,36 @@ _            = require "lodash"
 Scene        = require "./Scene"
 EventHandler = require "./EventHandler"
 actors       = require "./actors"
-Config       = require "./config"
 
 # Scene global instance.
-scene = {}
-
+scene          = null
+eventHandler   = null
+animationFrame = null
 
 # Render the scene.
-render = ->
+render = =>
   scene.render()
 
 
 # Keep the rendering loop active.
-animate = ->
-  requestAnimationFrame animate
+animate = =>
+  animationFrame = requestAnimationFrame animate
   render()
 
 
 # Initialize the app.
-init = ->
-  config = Config()
+init = (config) =>
+  # DOM elements
+  config.scene.canvas = document.getElementById "canvas"
+  config.eventHandler.elements =
+    audio: document.getElementById "audio"
+    text:  document.getElementById "text"
+  config.eventHandler.elements.text.size = 50
+
+  # Quick fixes
+  config.scene.height = window.innerHeight - 50
+  config.scene.width  = window.innerWidth - 1
+
   # Initalize components
   scene        = new Scene(config.scene)
   eventHandler = new EventHandler(scene, render, config.eventHandler)
@@ -47,5 +57,16 @@ init = ->
   animate()
 
 
+destroy = =>
+  cancelAnimationFrame(animationFrame)
+  scene.destroyContent()
+  eventHandler.removeListeners()
+  scene = null
+  eventHandler = null
+
+window.destroyContent = destroy
+
 # Start app.
-module.exports = init
+module.exports =
+  init: init
+  destroy: destroy

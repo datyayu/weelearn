@@ -70,7 +70,6 @@ gulp.task "styles", ->
     .pipe stylus
       use: [nib(), fa()]
       compress: yes
-
     .pipe concat("styles.css")
     .pipe gulp.dest(paths.styles.dest)
 
@@ -80,11 +79,7 @@ gulp.task "dev-scripts", ->
   gulp.src paths.scripts.src
     .pipe plumber
       errorHandler: onError
-    .pipe sourcemaps.init()
-    .pipe coffee()
     .pipe webpack require "./webpack.config"
-    .pipe uglify()
-    .pipe sourcemaps.write()
     .pipe gulp.dest(paths.scripts.dest)
     .pipe connect.reload()
 
@@ -94,7 +89,6 @@ gulp.task "scripts", ->
   gulp.src paths.scripts.src
     .pipe plumber
       errorHandler: onError
-    .pipe coffee()
     .pipe webpack require "./webpack.config"
     .pipe uglify()
     .pipe gulp.dest(paths.scripts.dest)
@@ -107,12 +101,12 @@ onError = (error) ->
 gulp.task "dev", [
   "dev-layouts"
   "dev-styles"
-  "dev-scripts"
+#  "dev-scripts"
   "dev-server"
 ], ->
-  gulp.watch paths.layouts.src, ["dev-layouts"]
-  gulp.watch paths.styles.watch,  ["dev-styles"]
-  gulp.watch paths.scripts.src, ["dev-scripts"]
+  gulp.watch paths.layouts.src,  ["dev-layouts"]
+  gulp.watch paths.styles.watch, ["dev-styles"]
+#  gulp.watch paths.scripts.src,  ["dev-scripts"]
 
 
 # Production task

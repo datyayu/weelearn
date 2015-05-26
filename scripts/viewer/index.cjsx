@@ -1,32 +1,39 @@
-React  = require "react"
-{Link} = require "react-router"
-viewer = require "./viewerInit"
+React          = require "react"
+{Link, Router} = require "react-router"
+Canvas         = require "./Viewer"
+ViewerStore    = require "../Viewer.store"
+ViewerActions  = require "../Viewer.actions"
 
 
 class Viewer extends React.Component
-  constructor: (props) ->
+  constructor: ->
     @state =
-      to: props.to
-      params: props.params
-      query: props.query
-    console.log @state
+      config: ViewerStore.getConfig()
 
-  componentDidMount: -> viewer()
+  componentDidMount: ->
+    ViewerStore.addChangeListener @onChange.bind(this)
+    Canvas.init(@state.config)
 
-  handleTouch: (e) =>
-    e.preventDefaul()
-    @context.router.transitionTo(@state.to, @state.params, @state.query)
+  componentWillUnmount: ->
+    ViewerStore.removeChangeListener @onChange.bind(this)
+    Canvas.destroy()
 
+  onChange: ->
+    @setState {config: ViewerStore.getConfig()}
 
-  render: =>
+  handleClick: (e) ->
+    window.location.href =  window.location.href.replace /viewer/, ""
+
+  render: ->
     <div>
       <div id="canvas"></div>
-      <div id="text" className="descrition-text">Cargando...</div>
+      <div id="text" className="descrition-text text">Cargando...</div>
       <div className="return-button">
-        <Link to="menu" onTouchStart={@handleTouch.bind(this)}>
-          <span className="icon-arrow"></span>
-        </Link>
+        <a onTouchStart={@handleClick} onClick={@handleClick}>
+          <span className="icon-arrow text"></span>
+        </a>
       </div>
     </div>
+
 
 module.exports = Viewer

@@ -9,7 +9,7 @@ class Stomach extends BodyPart
 
     # Set up config object.
     config.message  ?= "Estomago"
-    config.audioUrl ?= "/assets/audio/stomach.mp3"
+    config.audioUrl ?= "/assets/audio/estomago.mp3"
     config.model    ?= "/assets/models/stomach.json"
 
     # Parent constructor

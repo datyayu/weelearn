@@ -46,6 +46,18 @@ class Scene
 
     canvas.appendChild @_renderer.domElement
 
+  destroyContent: ->
+    @_renderer.domElement.addEventListener 'dblclick', null, false
+    @_controls.removeListeners()
+    children = @_scene.children
+    while (children.lastChild)
+      children.removeChild(children.lastChild)
+
+    @_scene    = null
+    @_camera   = null
+    @_controls = null
+    @_renderer = null
+
 
   # Return the instance's camera.
   # @return {Object} Instace's THREE.js Camera object.
