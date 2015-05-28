@@ -11,11 +11,11 @@ To install just do the usual ```$ npm install ``` and run using ```$ webpack-dev
   - [x] <s>Add support for sound.</s>
   - [x] <s>Replace Cube elements for proper body-like meshes.</s>
   - [x] <s>Add proper voices.</s>
-  - [ ] Split mesh properly into more parts.
+  - [x] <s>Change mesh material for the original one.</s>
+  - [x] <s>Create intro-to-app menu.</s>
+  - [x] <s>Add a config menu.</s>
+  - [x] <s>Split mesh properly into more parts.</s>
   - [ ] Add BG music @ low volume.
-  - [x] Change mesh material for the original one.
-  - [x] Create intro-to-app menu.
-  - [x] Add a config menu.
   - [ ] Use buttons to handle rotation/zoom/movement.
   - [ ] Create several levels based on the kid's autism level.
 
